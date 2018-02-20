@@ -1,11 +1,11 @@
 {% extends "layout.html" %}
 
-{% block title %}Michael's Mountain Biking Forum% endblock %}
+{% block title %}Michael's Mountain Biking Forum% endblock {% endblock %}
 
 {% block content %}
   <h1>Michael's Mountain Biking Forum</h1>
   <p>Welcome to Michaels biking forum. The only rules is that there are no rules!</p>
-  
+
   {% if logged_in %}
     <form action='/posted' method="post">
       <textarea name="message" style="width:100%; height:100px;"></textarea>
@@ -15,9 +15,9 @@
   {% else %}
      <p> you have to login to be able to post </p>
   {% endif %}
-    
-    
-  
+
+
+
   {{ past_posts }}
 
 

@@ -22,7 +22,7 @@ github = oauth.remote_app(
     base_url='https://api.github.com/',
     request_token_url=None,
     access_token_method='POST',
-    access_token_url='https://github.com/login/oauth/access_token',  
+    access_token_url='https://github.com/login/oauth/access_token',
     authorize_url='https://github.com/login/oauth/authorize' #URL for github's OAuth login
 )
 
@@ -35,17 +35,19 @@ def inject_logged_in():
 
 @app.route('/')
 def home():
-    return render_template('home.html', past_posts=posts_to_html())
+    # return render_template('home.html', past_posts=posts_to_html())
+    return render_template('home.html')
+    
 
 @app.route('/posted', methods=['POST'])
 def post():
-    return render_template('home.html', past_posts=posts_to_html())
-    #This function should add the new post to the JSON file of posts and then render home.html and display the posts.  
-    #Every post should include the username of the poster and text of the post. 
+    return render_template()
+    #This function should add the new post to the JSON file of posts and then render home.html and display the posts.
+    #Every post should include the username of the poster and text of the post.
 
 #redirect to GitHub's OAuth page and confirm callback URL
 @app.route('/login')
-def login():   
+def login():
     return github.authorize(callback=url_for('authorized', _external=True, _scheme='https')) #callback URL must match the pre-configured callback URL
 
 @app.route('/logout')
@@ -58,7 +60,7 @@ def authorized():
     resp = github.authorized_response()
     if resp is None:
         session.clear()
-        message = 'Access denied: reason=' + request.args['error'] + ' error=' + request.args['error_description'] + ' full=' + pprint.pformat(request.args)      
+        message = 'Access denied: reason=' + request.args['error'] + ' error=' + request.args['error_description'] + ' full=' + pprint.pformat(request.args)
     else:
         try:
             session['github_token'] = (resp['access_token'], '') #save the token to prove that the user logged in
