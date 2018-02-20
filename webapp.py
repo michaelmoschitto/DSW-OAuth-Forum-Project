@@ -35,6 +35,8 @@ def inject_logged_in():
 
 @app.route('/')
 def home():
+    with open('posts.json') as json:
+        jsonData = json.load(json)
     # return render_template('home.html', past_posts=posts_to_html())
     return render_template('home.html')
     
