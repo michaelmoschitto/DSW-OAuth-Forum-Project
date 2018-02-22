@@ -9,6 +9,7 @@ import json
 app = Flask(__name__)
 
 app.debug = True #Change this to False for production
+jsonData="post.json"
 
 app.secret_key = os.environ['SECRET_KEY'] #used to sign session cookies
 oauth = OAuth(app)
@@ -37,14 +38,14 @@ def inject_logged_in():
 
 @app.route('/')
 def home():
-    with open('posts.json') as myjson:
-        jsonData = json.load(myjson)
+    with open(jsonData) as myjson:
+        myFile = json.load(myjson)
     # return render_template('home.html', past_posts=posts_to_html())
     return render_template('home.html')
 
 #fixes the error no file or directory for my json file
 os.system("echo'[]'>" + jsonData)
-    
+
 
 @app.route('/posted', methods=['POST'])
 def post():
