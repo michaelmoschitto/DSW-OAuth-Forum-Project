@@ -13,6 +13,8 @@ app.debug = True #Change this to False for production
 app.secret_key = os.environ['SECRET_KEY'] #used to sign session cookies
 oauth = OAuth(app)
 
+
+
 #Set up GitHub as OAuth provider
 github = oauth.remote_app(
     'github',
@@ -39,6 +41,9 @@ def home():
         jsonData = json.load(myjson)
     # return render_template('home.html', past_posts=posts_to_html())
     return render_template('home.html')
+
+#fixes the error no file or directory for my json file
+os.system("echo'[]'>" + jsonData)
     
 
 @app.route('/posted', methods=['POST'])
