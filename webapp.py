@@ -84,7 +84,7 @@ def post():
 #redirect to GitHub's OAuth page and confirm callback URL
 @app.route('/login')
 def login():
-    return github.authorize(callback='http://127.0.0.1:5000/login/authorized') #callback URL must match the pre-configured callback URL
+    return github.authorize(callback='https://forum-oath-project.herokuapp.com/login/authorized') #callback URL must match the pre-configured callback URL
 
     # (callback=url_for('authorized', _external=True, _scheme='https'))
 
