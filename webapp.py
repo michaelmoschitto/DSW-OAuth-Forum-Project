@@ -44,7 +44,7 @@ def home():
     # return render_template('home.html')
 
 #fixes the error no file or directory for my json file
-jsonData="post.json"
+# jsonData="post.json"
 os.system("echo'[]'>" + jsonData)
 
 
