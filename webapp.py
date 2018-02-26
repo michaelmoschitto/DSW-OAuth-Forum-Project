@@ -9,7 +9,7 @@ import json
 app = Flask(__name__)
 
 app.debug = True #Change this to False for production
-
+jsonData="post.json"
 
 app.secret_key = os.environ['SECRET_KEY'] #used to sign session cookies
 oauth = OAuth(app)
@@ -44,8 +44,8 @@ def home():
     # return render_template('home.html')
 
 #fixes the error no file or directory for my json file
-# jsonData="post.json"
-os.system("echo'[]'>" + jsonData)
+os.system("echo '[]'>" + jsonData)
+# os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 
 def posts_to_html():
