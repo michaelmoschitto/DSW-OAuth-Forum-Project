@@ -40,23 +40,53 @@ def inject_logged_in():
 def home():
     with open(jsonData) as myjson:
         myFile = json.load(myjson)
-    # return render_template('home.html', past_posts=posts_to_html())
-    return render_template('home.html')
+    return render_template('home.html', past_posts=posts_to_html())
+    # return render_template('home.html')
 
 #fixes the error no file or directory for my json file
-os.system("echo'[]'>" + jsonData)
+os.system("echo '[]'>" + jsonData)
+# os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
+
+def posts_to_html():
+    table = Markup("<table class='table table-bordered'> <tr> <th> Username </th> <th> Message </th> </tr>")
+    try:
+        with open(jsonData, 'r+') as j:
+            postData=json.load(j)
+
+        for i in postData:
+            table += Markup("<tr> <td>" + i["username"] + "</td> <td>" + i["message"] + "</td>")
+    except:
+        table += Markup("</table>")
+    return table
 
 @app.route('/posted', methods=['POST'])
 def post():
-    return render_template()
+    username=session['user_data']['login']
+    postText=request.form['message']
+    try:
+        with open(jsonData, 'r+') as j:
+            postData=json.load(j)
+            # add new post to the list. Delete everything from the json file and put in list
+            postData.append({"username":username, "message":message})
+
+            j.seek(0)
+            j.truncate()
+            json.dump(postData,j)
+    except Exception as e:
+        print("unable to load Json :(")
+        print(e)
+
+    return render_template('home.html', past_posts=posts_to_html)
     #This function should add the new post to the JSON file of posts and then render home.html and display the posts.
     #Every post should include the username of the poster and text of the post.
 
 #redirect to GitHub's OAuth page and confirm callback URL
 @app.route('/login')
 def login():
-    return github.authorize(callback=url_for('authorized', _external=True, _scheme='https')) #callback URL must match the pre-configured callback URL
+    return github.authorize(callback='http://127.0.0.1:5000/login/authorized') #callback URL must match the pre-configured callback URL
+
+    # (callback=url_for('authorized', _external=True, _scheme='https'))
 
 @app.route('/logout')
 def logout():
