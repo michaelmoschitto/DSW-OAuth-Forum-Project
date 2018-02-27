@@ -73,6 +73,7 @@ def post():
             j.seek(0)
             j.truncate()
             json.dump(postData,j)
+            print(postData)
     except Exception as e:
         print("unable to load Json :(")
         print(e)
