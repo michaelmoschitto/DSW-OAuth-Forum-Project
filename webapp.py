@@ -66,7 +66,7 @@ def post():
     username=session['user_data']['login']
     postText=request.form['message']
     if postText="":
-        return render_template('message.html', message='Message needs to contain text')
+        # return render_template('message.html', message='Message needs to contain text')
     try:
         with open(jsonData, 'r+') as j:
             postData=json.load(j)
