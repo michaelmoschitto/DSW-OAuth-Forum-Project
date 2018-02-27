@@ -68,14 +68,14 @@ def post():
         with open(jsonData, 'r+') as j:
             postData=json.load(j)
             # add new post to the list. Delete everything from the json file and put in list
-            postData.append({"username":username, "message":message})
+            postData.append({"username":username, "message":postText})
 
             j.seek(0)
             j.truncate()
             json.dump(postData,j)
             print(postData)
     except Exception as e:
-        print("unable to load Json :(")
+        print("unable to load Json")
         print(e)
 
     return render_template('home.html', past_posts=posts_to_html())
