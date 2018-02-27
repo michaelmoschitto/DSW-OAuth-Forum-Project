@@ -38,7 +38,7 @@ def inject_logged_in():
 
 @app.route('/')
 def home():
-    session.clear()
+
     with open(jsonData) as myjson:
         myFile = json.load(myjson)
     return render_template('home.html', past_posts=posts_to_html())
@@ -86,6 +86,7 @@ def post():
 #redirect to GitHub's OAuth page and confirm callback URL
 @app.route('/login')
 def login():
+    session.clear()
     return github.authorize(callback='https://forum-oath-project.herokuapp.com/login/authorized') #callback URL must match the pre-configured callback URL
 
     # (callback=url_for('authorized', _external=True, _scheme='https'))
