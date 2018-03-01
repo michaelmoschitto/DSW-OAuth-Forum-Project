@@ -67,7 +67,8 @@ def posts_to_html():
         for i in postData:
             table += Markup("<tr> <td>" + i["username"] + "</td> <td>" + i["message"] + "</td>")
             if session['user_data']['login'] == i["username"]:
-                table += Markup("<td>" + '<button type="button" class="btn btn-secondary">Delete</button>' + "</td>" + "</tr>") target = buttonTarget
+                table += Markup("<td>" + '<button type="button" class="btn btn-secondary">Delete</button>' + "</td>" + "</tr>")
+                # target = buttonTarget
             else:
                 table += Markup("</tr>")
             # + "<td>" + "<button type="button" class="btn btn-secondary">Secondary</button>" + "</td>")
@@ -85,7 +86,7 @@ def post():
         with open(jsonData, 'r+') as j:
             postData=json.load(j)
             # add new post to the list. Delete everything from the json file and put in list
-            postData.append({"username":username, "message":postText, "key": postkey})
+            postData.append({"username":username, "message":postText, "key":postkey})
             print(postkey)
             postkey += 1
 
