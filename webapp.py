@@ -10,6 +10,7 @@ app = Flask(__name__)
 
 app.debug = True #Change this to False for production
 jsonData="post.json"
+postkey = 0
 
 app.secret_key = os.environ['SECRET_KEY'] #used to sign session cookies
 oauth = OAuth(app)
@@ -48,6 +49,14 @@ def home():
 os.system("echo '[]'>" + jsonData)
 # os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
+# @app.route('/buttonTarget', methods=['POST'])
+# def buttonTarget():
+#     try:
+#         with open(jsonData, 'r+') as j:
+#             postData=json.load(j)
+#
+#     return render_template('home.html', past_posts=)
+
 
 def posts_to_html():
     table = Markup("<table class='table table-bordered'> <tr> <th> Username </th> <th> Message </th> </tr>")
@@ -58,7 +67,7 @@ def posts_to_html():
         for i in postData:
             table += Markup("<tr> <td>" + i["username"] + "</td> <td>" + i["message"] + "</td>")
             if session['user_data']['login'] == i["username"]:
-                table += Markup("<td>" + '<button type="button" class="btn btn-secondary">Delete</button>' + "</td>" + "</tr>")
+                table += Markup("<td>" + '<button type="button" class="btn btn-secondary">Delete</button>' + "</td>" + "</tr>") target = buttonTarget
             else:
                 table += Markup("</tr>")
             # + "<td>" + "<button type="button" class="btn btn-secondary">Secondary</button>" + "</td>")
@@ -76,7 +85,8 @@ def post():
         with open(jsonData, 'r+') as j:
             postData=json.load(j)
             # add new post to the list. Delete everything from the json file and put in list
-            postData.append({"username":username, "message":postText})
+            postData.append({"username":username, "message":postText, "key": postkey})
+            postkey += 1
 
             j.seek(0)
             j.truncate()
