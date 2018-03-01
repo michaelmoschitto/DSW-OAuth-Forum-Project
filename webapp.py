@@ -50,7 +50,7 @@ os.system("echo '[]'>" + jsonData)
 
 
 def posts_to_html():
-    table = Markup("<table class='table table-bordered'> <tr> <th> Username </th> <th> Message </th> </tr>")
+    table = Markup("<table class='table table-bordered'> <tr> <th> Username </th> <th> Message </th> <button type="button" class="btn btn-secondary">Secondary</button></tr>")
     try:
         with open(jsonData, 'r+') as j:
             postData=json.load(j)
