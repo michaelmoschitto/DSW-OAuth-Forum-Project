@@ -88,7 +88,7 @@ def post():
 #redirect to GitHub's OAuth page and confirm callback URL
 @app.route('/login')
 def login():
-    session.clear()
+    # session.clear()
     return github.authorize(callback='https://forum-oath-project.herokuapp.com/login/authorized') #callback URL must match the pre-configured callback URL
 
     # (callback=url_for('authorized', _external=True, _scheme='https'))
@@ -102,7 +102,7 @@ def logout():
 def authorized():
     resp = github.authorized_response()
     if resp is None:
-        session.clear()
+        # session.clear()
         message = 'Access denied: reason=' + request.args['error'] + ' error=' + request.args['error_description'] + ' full=' + pprint.pformat(request.args)
     else:
         try:
