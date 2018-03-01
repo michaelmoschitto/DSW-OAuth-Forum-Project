@@ -56,7 +56,8 @@ def posts_to_html():
             postData=json.load(j)
 
         for i in postData:
-            table += Markup("<tr> <td>" + i["username"] + "</td> <td>" + i["message"] + "</td>" + "<td>" + "<button type="button" class="btn btn-secondary">Secondary</button>" + "</td>")
+            table += Markup("<tr> <td>" + i["username"] + "</td> <td>" + i["message"] + "</td>")
+            # + "<td>" + "<button type="button" class="btn btn-secondary">Secondary</button>" + "</td>")
     except:
         table += Markup("</table>")
     return table
