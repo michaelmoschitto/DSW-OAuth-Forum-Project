@@ -61,7 +61,7 @@ def posts_to_html():
                 table += Markup("<td>" + '<button type="button" class="btn btn-secondary">Secondary</button>' + "</td>" + "</tr>")
             else:
                 table += Markup("</tr>")
-            + "<td>" + "<button type="button" class="btn btn-secondary">Secondary</button>" + "</td>")
+            # + "<td>" + "<button type="button" class="btn btn-secondary">Secondary</button>" + "</td>")
     except:
         table += Markup("</table>")
     return table
