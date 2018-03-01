@@ -57,12 +57,11 @@ def posts_to_html():
 
         for i in postData:
             table += Markup("<tr> <td>" + i["username"] + "</td> <td>" + i["message"] + "</td>")
-            if session['user_data']['login'] = i["username"]:
-                let = 0
-            #     table += Markup("<td>" + '<button type="button" class="btn btn-secondary">Secondary</button>' + "</td>" + "</tr>")
-            # else:
-            #     table += Markup("</tr>")
-            # + "<td>" + "<button type="button" class="btn btn-secondary">Secondary</button>" + "</td>")
+            if session['user_data']['login'] == i["username"]:
+                table += Markup("<td>" + '<button type="button" class="btn btn-secondary">Secondary</button>' + "</td>" + "</tr>")
+            else:
+                table += Markup("</tr>")
+            + "<td>" + "<button type="button" class="btn btn-secondary">Secondary</button>" + "</td>")
     except:
         table += Markup("</table>")
     return table
