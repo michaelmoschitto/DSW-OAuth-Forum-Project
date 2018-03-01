@@ -50,13 +50,13 @@ os.system("echo '[]'>" + jsonData)
 
 
 def posts_to_html():
-    table = Markup("<table class='table table-bordered'> <tr> <th> Username </th> <th> Message </th> <button type="button" class="btn btn-secondary">Secondary</button></tr>")
+    table = Markup("<table class='table table-bordered'> <tr> <th> Username </th> <th> Message </th> </tr>")
     try:
         with open(jsonData, 'r+') as j:
             postData=json.load(j)
 
         for i in postData:
-            table += Markup("<tr> <td>" + i["username"] + "</td> <td>" + i["message"] + "</td>")
+            table += Markup("<tr> <td>" + i["username"] + "</td> <td>" + i["message"] + "</td>" +"</td>" "<button type="button" class="btn btn-secondary">Secondary</button>" "</td>")
     except:
         table += Markup("</table>")
     return table
