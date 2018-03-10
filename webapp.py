@@ -86,9 +86,7 @@ def post():
         with open(jsonData, 'r+') as j:
             postData=json.load(j)
             # add new post to the list. Delete everything from the json file and put in list
-            postData.append({"username":username, "message":postText, "key":postkey})
-            print(postkey)
-            postkey += 1
+            postData.append({ "username":username, "message":postText })
 
             j.seek(0)
             j.truncate()
